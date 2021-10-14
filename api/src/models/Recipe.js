@@ -23,17 +23,17 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    // spoonacularScore: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
-    // healthScore: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
-    // analyzedInstructions: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: false,
-    // },
+    spoonacularScore: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    healthScore: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    analyzedInstructions: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   });
 };

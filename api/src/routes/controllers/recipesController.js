@@ -11,6 +11,7 @@ const recipesAxios = `https://api.spoonacular.com/recipes/complexSearch?apiKey=$
 /////////////////////////funcion para obtener las primeras 100 recetas o bien recetas por query name /////////////////////////
 async function getRecipes(req, res, next) {
     const { name } = req.query;
+
     try {
         /////////trae los datos de la API
         let recipes = (await axios(recipesAxios)).data.results;
@@ -20,20 +21,19 @@ async function getRecipes(req, res, next) {
 
         //iLike para busquedas con terminos parciales https://sequelize.org/v5/manual/models-usage.html
         let recipesDB = name ? //inicializa base de datos
-            await Recipe.findAll({ where: { title: { [Op.iLike]: `%${name}%` } }, include: { model: Diet } }): ////cuando tenemos un name busca solo los elementos con ese name
+            await Recipe.findAll({ where: { title: { [Op.iLike]: `%${name}%` } }, include: { model: Diet } }) : ////cuando tenemos un name busca solo los elementos con ese name
             await Recipe.findAll({ include: { model: Diet } }); //traemos todo
-       
+
         //recipes = format(recipes); //damos formato
-        
-        
+
+
         const results = format([...recipesDB, ...recipes]); /// concatenamos resultados de la db y damos formato
 
         (name && !results.length) ? //si tenemos un name y no encontro nada ni en la API ni en la DB regresamos un error
             res.status(404).json("recipe not found") :
             res.status(200).json(results);
-
-
     }
+
     catch (err) {
         next(err);
     }
@@ -68,14 +68,14 @@ async function getRecipesId(req, res, next) {
 function format(elementos) {
     return elementos.map(e => {
         const { id, title, summary, } = e;
-        const diets = e.diets.map(a=> e?.name || e)
+        const diets = e.diets.map(a =>  a?.name || a)
         const aux = {
             id,
             title,
             summary,
             diets
-           }
-        e?.image && (aux['image'] = e.image) 
+        }
+        e?.image && (aux['image'] = e.image)
         return aux
     })
 

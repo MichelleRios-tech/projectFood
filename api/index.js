@@ -24,11 +24,11 @@ const { conn, Recipe, Diet } = require('./src/db.js');
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     initializeDBForTest();
-    
+    createDiets();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
-
+///////////////////// crear un elemento con relacion para probar conexion con base de datos y peticiones
 async function initializeDBForTest (){
    Recipe.create({
       title: 'test',
@@ -40,4 +40,22 @@ async function initializeDBForTest (){
           }
         ).then(testDiet => testRecipe.addDiet(testDiet) ) )
       
+}
+
+async function createDiets() {
+  const diets = ['gluten free',
+                  'ketogenic',
+                  'vegetarian',
+                  'lacto-vegetarian',
+                  'ovo-vegetarian', 
+                  'vegan',
+                  'pescetarian',
+                  'paleo',
+                  'primal',
+                  'low FODMAP',
+                  'whole30'
+                 ]
+
+    diets.forEach(e => Diet.create({name: e}))
+
 }
