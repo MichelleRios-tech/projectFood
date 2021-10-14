@@ -18,11 +18,26 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const { conn, Recipe, Diet } = require('./src/db.js');
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
+    initializeDBForTest();
+    
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });
+
+async function initializeDBForTest (){
+   Recipe.create({
+      title: 'test',
+      summary: 'resumen prueba'
+    }).then(testRecipe =>
+      Diet.create(
+          {
+            name: "diet test"
+          }
+        ).then(testDiet => testRecipe.addDiet(testDiet) ) )
+      
+}

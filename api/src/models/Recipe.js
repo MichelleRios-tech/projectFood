@@ -10,32 +10,29 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    // dishType: {
+    // dishTypes: {
     //   type: DataTypes.STRING,
     //   allowNull: false,
     // },
-    // dietType: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
-    dishResume: {
+  
+    summary: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    // score: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: false,
-    // },
-    // healthscore: {
+    // spoonacularScore: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false,
     // },
-    // steptToStep: {
-    //   type: DataTypes.STRING,
+    // healthScore: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
+    // analyzedInstructions: {
+    //   type: DataTypes.TEXT,
     //   allowNull: false,
     // },
   });
