@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../../Redux/actions';
+import NavBar from '../NavBar/NavBar';
 import Paginator from '../Paginator/Paginator';
 import SearchBar from '../SearchBar/SearchBar';
 import Tag from '../Tag/Tag';
@@ -43,6 +44,7 @@ function Home() {
     let pagedList = orderedList.slice(inicial, final);
     return (
         <div className='home'>
+            <NavBar/>
             <SearchBar searchOptions={searchOptions} setSearchOptions={setSearchOptions} key='searchbar' />
             <Paginator totalElements={orderedList.length} />
             {pagedList.length && pagedList.map(e => <Tag recipe={e} key={e.id} />)}

@@ -8,11 +8,13 @@ const {recipesAxios} = require ('./recipesController')
 
 module.exports = async function getTypes (req,res,next){
 try  { 
-    const types = (await axios(recipesAxios)).data.results;
+    try{
+        const types = (await axios(recipesAxios)).data.results;
     types.forEach(e=> e.diets.forEach (e=> 
         Diet.findOrCreate({where: {name: e}})
         ))
-
+    }catch(err){console.log(err)};
+    
     Diet.findAll().then(diets => {
         diets = diets.map(diet => diet.name)
         res.status(200).json(diets)})

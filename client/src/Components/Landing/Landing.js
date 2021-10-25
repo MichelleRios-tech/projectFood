@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import "./landing.css";
-import { useDispatch, useSelector } from "react-redux";
+import './landing.css';
+import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../../Redux/actions';
 
 
@@ -17,8 +17,8 @@ function Landing() {
 
     //SE RENDERIZA EL LANDING
     return (
-        <div className="Landing">
-            <Link to="/home"><button className="LandingButton">Home</button></Link>
+        <div className='Landing'>
+            <Link to='/home'><button className='LandingButton'>Home</button></Link>
         </div>
     )
 }

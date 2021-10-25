@@ -28,15 +28,15 @@ function Paginator({ totalElements }) {
     )
 
     return (
-        <div className="paginator">
+        <div className='paginator'>
 
             <ul className='numbers'>
                 <li>
-                    <button className="previousButton" value={-1} onClick={handleClick} disabled={PAGE === 1}>⏮</button>
+                    <button className='previousButton paginatorBtn' value={-1} onClick={handleClick} disabled={PAGE === 1}>⏮</button>
                 </li>
                 {renderPaginator}
                 <li>
-                    <button className="nextButton" value={1} onClick={handleClick} disabled={PAGE === pageLimit}>⏭</button>
+                    <button className='nextButton paginatorBtn' value={1} onClick={handleClick} disabled={PAGE === pageLimit}>⏭</button>
                 </li>
             </ul>
 

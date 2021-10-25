@@ -3,6 +3,8 @@ import './App.css';
 import Landing from './Components/Landing/Landing'
 import Home from './Components/Home/Home';
 import SearchBar from './Components/SearchBar/SearchBar';
+import Form from './Components/Form/Form';
+
 function App() {
   return (
     <>
@@ -16,10 +18,10 @@ function App() {
           <Route exact path="/home">
             <Home />
           </Route>
-          <Route exact path='/search' component={SearchBar}/>{/*
+          <Route exact path='/search' component={SearchBar}/>
           <Route exact path="/create">
             <Form/>
-          </Route>  */}
+          </Route> 
       </div>
     </>
   );
