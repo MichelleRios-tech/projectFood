@@ -1,0 +1,22 @@
+.dietList{
+    display: grid;
+    place-items: center;
+    text-align: center;
+    border: 1px solid coral;
+}
+
+.tag{
+    border: 1px solid #000;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    height: auto;
+    width: 100%;
+    justify-content: center;
+}
+
+.recipeIMG{
+  
+    height: 231px;
+    width: 312px;
+}

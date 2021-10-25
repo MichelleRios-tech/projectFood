@@ -5,38 +5,50 @@ const {
     API_KEY
 } = process.env;
 
-const recipesAxios = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=2`;
+const recipesAxios = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`;
 
 
 /////////////////////////funcion para obtener las primeras 100 recetas o bien recetas por query name /////////////////////////
 async function getRecipes(req, res, next) {
     const { name } = req.query;
 
-    try {
-        /////////trae los datos de la API
-        let recipes = (await axios(recipesAxios)).data.results;
-
-        ////////si name existe lo filtramos por name
-        if (name) recipes = recipes.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
-
+   
         //iLike para busquedas con terminos parciales https://sequelize.org/v5/manual/models-usage.html
         let recipesDB = name ? //inicializa base de datos
             await Recipe.findAll({ where: { title: { [Op.iLike]: `%${name}%` } }, include: { model: Diet } }) : ////cuando tenemos un name busca solo los elementos con ese name
             await Recipe.findAll({ include: { model: Diet } }); //traemos todo
 
-        //recipes = format(recipes); //damos formato
+        /////////trae los datos de la API
+        let recipes =[];
+        try {
 
+             recipes = (await axios(recipesAxios)).data.results;
+            
+        } catch (error) {
+            recipes = [{
+                id: 1,
+                title: 'No response from API',
+                summary: error,
+                diets: ["vegan"]
+                
+            }];
+            console.log(error);
+        }
 
-        const results = format([...recipesDB, ...recipes]); /// concatenamos resultados de la db y damos formato
+        ////////si name existe lo filtramos por name
+        if (name) recipes = recipes.filter(e => e.title.toLowerCase().includes(name.toLowerCase()));
 
-        (name && !results.length) ? //si tenemos un name y no encontro nada ni en la API ni en la DB regresamos un error
+        
+        /// concatenamos resultados de la db y damos formato
+        const results = format([...recipesDB, ...recipes]); 
+
+        //si tenemos un name y no encontro nada ni en la API ni en la DB regresamos un error
+        (name && !results.length) ? 
             res.status(404).json("recipe not found") :
             res.status(200).json(results);
-    }
+    
 
-    catch (err) {
-        next(err);
-    }
+  
 
 }
 
@@ -46,7 +58,6 @@ async function getRecipes(req, res, next) {
 async function getRecipesId(req, res, next) {
 
     try {
-
 
         const { id } = req.params
         const recipesAxiosByID = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`;
@@ -67,8 +78,8 @@ async function getRecipesId(req, res, next) {
 ////////////////// funcion para darle formato a los resultados///////////////////////////////////
 function format(elementos) {
     return elementos.map(e => {
-        const { id, title, summary, } = e;
-        const diets = e.diets.map(a =>  a?.name || a)
+        const { id, title, summary } = e;
+        const diets = e.diets?.map(a =>  a?.name || a)
         const aux = {
             id,
             title,
@@ -76,9 +87,9 @@ function format(elementos) {
             diets
         }
         e?.image && (aux['image'] = e.image)
-        return aux
+        return aux //return para cada elemento de map
     })
 
 }
 
-module.exports = { getRecipes, getRecipesId }
+module.exports = { getRecipes, getRecipesId, recipesAxios }
