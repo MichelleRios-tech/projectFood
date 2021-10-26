@@ -22,7 +22,7 @@ module.exports = async function postRecipe(req, res, next) {
                 healthScore,
                 analyzedInstructions,
             }
-        }).then(newRecipe => {
+        }).then( newRecipe => {
             ///si se paso diets como un array agregamos cada diet que se recivio por body a la receta
             Array.isArray(diets) && diets.forEach(diet =>
                 Diet.findOrCreate({where:{ name: diet.toLowerCase()}})// { where: { name: { [Op.iLike]: name } } iLike rompe create

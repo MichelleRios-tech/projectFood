@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom'
 
+import { Link } from 'react-router-dom'
+import './NavBar.css'
 
 function NavBar() {
+        
+    
     return (
-        <div>
-            <Link to='/'>Landing</Link>
-            <Link to='/home'>Home</Link>
-            <Link to='/create'>Create</Link>
-        </div>
+        <ul className='linksList'>
+            <Link to='/' className='link'>Landing</Link>
+            <Link to='/food' className='link'>Home</Link>
+            <Link to='/food/create' className='link'>Create</Link>
+        </ul>
     )
 }
 

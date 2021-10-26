@@ -1,15 +1,23 @@
 .Landing{
     display: grid;
+    font-family: "Brush Script MT";
     place-items: center;
     background-color: whitesmoke;
-    width: 800px;
-    height: 200px;
+    width: 50vw;
+    height: 35vh;
     border-radius: 50px;
-    opacity: .98;
+    background-blend-mode: color;
     filter: blur(.5px);
     
+    
+}
+h1{
+    
+    font-size: 3em;
+    text-shadow: 2px 2px #272726d2;
 }
 .LandingButton{
+    position: relative;
     font-size: larger;
     width: 100px;
     height: 30px;

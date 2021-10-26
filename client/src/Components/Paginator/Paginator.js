@@ -15,6 +15,9 @@ function Paginator({ totalElements }) {
     }
 
     const handleClick = (e) => {
+        dispatch(updatePage(e.target.value));
+    }
+    const handleButtonClick = (e) => {  
         dispatch(updatePage(parseInt(PAGE) + parseInt(e.target.value)));
     }
     /////SE USAN <li> YA QUE BUTTON NO CAMBIA SU CLASSNAME AL CLICKEARSE///////////
@@ -32,11 +35,11 @@ function Paginator({ totalElements }) {
 
             <ul className='numbers'>
                 <li>
-                    <button className='previousButton paginatorBtn' value={-1} onClick={handleClick} disabled={PAGE === 1}>⏮</button>
+                    <button className='previousButton paginatorBtn' value={-1} onClick={handleButtonClick} disabled={PAGE === 1}>{'<<'}</button>
                 </li>
                 {renderPaginator}
                 <li>
-                    <button className='nextButton paginatorBtn' value={1} onClick={handleClick} disabled={PAGE === pageLimit}>⏭</button>
+                    <button className='nextButton paginatorBtn' value={1} onClick={handleButtonClick} disabled={PAGE === pageLimit}>{'>>'}</button>
                 </li>
             </ul>
 

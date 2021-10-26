@@ -9,6 +9,7 @@ const urls = {
     RECIPES: 'http://localhost:3001/recipes', //RUTA PARA OBTENER LAS RECETAS
     ALL_DIETS: 'http://localhost:3001/types',//RUTA DE LOS TYPOS DE DIETA
     CREATE_RECIPE: 'http://localhost:3001/recipe'
+    
 }
 
 
@@ -32,3 +33,15 @@ export const createRecipe = (recipe)=>{
         .catch(e=> console.log(e))
 }
     
+export const getRecipeById = (id)=>{
+    return (dispatch)=>{
+        axios.get(urls.RECIPES+'/'+id)
+        .then(response => dispatch({type: 'RECIPE_ID', payload: response.data}))
+    }
+}
+
+export const cleanRecipe = ()=>{
+    return (dispatch)=>{
+        dispatch({type: 'RECIPE_ID', payload: null})
+    }
+}

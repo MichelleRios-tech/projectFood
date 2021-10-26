@@ -1,0 +1,27 @@
+.link {
+    border: 1px solid rgb(167, 165, 165);
+    cursor: pointer;
+    background-color: white;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    text-shadow: whitesmoke;
+    font-size: 20px;
+    text-decoration: none;
+      }
+      .link:hover {
+          background-color: rgb(240, 236, 224);
+      }
+.linksList {
+    padding-inline-start: 1px;
+    background-color: transparent;
+    width: min-content;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    justify-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+      }      
+

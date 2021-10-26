@@ -2,7 +2,8 @@
 const initialState = {
     RECIPES: [],
     DIETS: [],
-    PAGE: 1
+    PAGE: 1,
+    RECIPE_BY_ID: {}
 }
 /////REDUCER SIN BOILERPLATE https://redux.js.org/usage/structuring-reducers/refactoring-reducer-example//////////
 export const foodRedux = (state = initialState, { type, payload })=> {
@@ -14,7 +15,8 @@ export const foodRedux = (state = initialState, { type, payload })=> {
     const foodReducer = {
             ALL_DIETS: 'DIETS',
             RECIPES: 'RECIPES',
-            UPDATE_PAGE: 'PAGE'
+            UPDATE_PAGE: 'PAGE',
+            RECIPE_ID: 'RECIPE_BY_ID',
             
     }
 

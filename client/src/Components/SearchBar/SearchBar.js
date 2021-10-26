@@ -15,6 +15,7 @@ function SearchBar(props) {
     const dispatch = useDispatch()
     const setSearchOptions = props.setSearchOptions;
     const searchOptions = props.searchOptions;
+
     ////TREMOS LA RECETAS DE LA DB/////
     useEffect(() => {
         !DIETS.length && dispatch(getData('ALL_DIETS'));
@@ -36,6 +37,7 @@ function SearchBar(props) {
     //CAMBIO DE LAS OPCIONES DE BUSQUEDA /////
     const handleClick = (e) => {
         setSearchOptions({ ...searchOptions, [e.target.name]: e.target.value });
+        console.log(searchOptions);
 
     }
     const createSearch = () =>
@@ -47,10 +49,17 @@ function SearchBar(props) {
             onKeyUp={(e) => e.key === 'Enter' && handleSearch(e)} //ejecuta la busqueda al presionar enter y pasamos event por callback
         />
 
-    const createSelect = () => <div className='select'>
+    const createSelect = () => 
+    <div className='select'>
         <label htmlFor='diets'>Choose a diet:</label>
         <select name='diets' onChange={handleClick} id='diets'>
             {DIETS.map((diet, index) => <option key={index + diet} value={diet} >{diet}</option>)}
+        </select>
+        <select name='order' onChange={handleClick} id='diets'>
+            <option value='def'>Default</option>
+            <option value='asc'>Ascending</option>
+            <option value='desc'>Descending</option>
+            <option value='score'>Score</option>
         </select>
     </div>
 
@@ -62,13 +71,13 @@ function SearchBar(props) {
 
     return (
 
-        <div className='searchContainer'>
+        <div className='searchBar'>
             {/* <form className='SearchOptions' onSubmit={handleSearch} key='form'> */}
             {createSearch()}
             {/* </form> */}
             {createSelect()}
             {createRadio()}
-
+            
 
         </div>
     )

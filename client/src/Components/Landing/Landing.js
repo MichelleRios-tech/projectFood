@@ -17,8 +17,12 @@ function Landing() {
 
     //SE RENDERIZA EL LANDING
     return (
+        
         <div className='Landing'>
-            <Link to='/home'><button className='LandingButton'>Home</button></Link>
+            <h1>Project foods</h1>
+            <h2>By: Irving Rios</h2>
+            <h3>Find the best recipes</h3>
+            <Link to='/food'><button className='LandingButton'>Home</button></Link>
         </div>
     )
 }

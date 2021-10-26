@@ -1,5 +1,9 @@
 import './Tag.css'
 import React from 'react'
+import {Link} from 'react-router-dom'
+import Details from '../Details/Details'
+
+
 const defIMG = 'https://i.pinimg.com/originals/31/9a/2d/319a2d108b51035bcdd43edc37866094.gif'
 function Tag({ recipe }) {
     
@@ -8,11 +12,13 @@ function Tag({ recipe }) {
         <div className='tag'>
             {/*  /<?\/?b?>/g => expresion regular para encontrar los saltos de linea y borrarlos e*/}
             {/* {`${recipe.summary.replaceAll(/<?\/?b>/g, '\n')}`} */}
+            <Link to={`/food/recipe/${recipe.id}`}>
             <img className='recipeIMG'src={recipe?.image || defIMG} alt='recipe IMG' />
-            <h2>{recipe.title}</h2>
-            <div dangerouslySetInnerHTML={{ __html: recipe.summary }} /> 
-            <div className='DietsList'>{recipe.diets.map(e => <>{e}<br/></>)}</div>
-
+            </Link>
+            <div className='recipeInfo'>
+                <h3>{recipe.title}</h3> 
+                <div className='DietsList'>Diets: {recipe.diets.map(e => <>{e+" / "}</>)}</div>
+            </div>
         </div>
     )
 }
